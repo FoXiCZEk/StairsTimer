@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StairsTimer</string>
+
+    <array name="spinner1">
+        <item>Home</item>
+        <item>Přehled</item>
+        <item>About</item>
+    </array>
+
+</resources>
