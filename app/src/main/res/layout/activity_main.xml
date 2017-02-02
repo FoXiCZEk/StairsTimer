@@ -24,7 +24,7 @@
     <Button
         android:text="Start!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/button_start"
         android:layout_alignParentEnd="true"
@@ -33,8 +33,10 @@
     <Button
         android:text="STOP!"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_above="@+id/button_start"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:id="@+id/button_stop"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -43,7 +45,7 @@
     <Button
         android:text="PATRO"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/button_patro"
         android:layout_alignParentStart="true"

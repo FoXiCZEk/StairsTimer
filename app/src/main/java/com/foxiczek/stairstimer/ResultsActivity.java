@@ -197,6 +197,9 @@ public class ResultsActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            if(filename.exists()){
+                Toast.makeText(ResultsActivity.this, String.valueOf("DATA STORED LOCALLY"), Toast.LENGTH_SHORT).show();
+            }
 
         }
 
