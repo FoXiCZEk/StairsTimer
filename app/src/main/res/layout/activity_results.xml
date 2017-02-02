@@ -37,8 +37,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView_result"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button_save"
         android:layout_below="@+id/my_toolbar"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"
+        android:layout_above="@+id/button_save_local" />
+
+    <Button
+        android:text="SAVE LOCALY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_save"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button_save_local" />
 </RelativeLayout>

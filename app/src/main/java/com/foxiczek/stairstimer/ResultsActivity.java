@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +17,13 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -27,9 +34,11 @@ public class ResultsActivity extends AppCompatActivity {
     String webOutputFields = "";
     String webOutputValues = "";
     Integer[] casNaPatro;
-    Button button_save;
+    Button button_save, button_saveLocal;
+    File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + "Stairs2");
 
-
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+    FileOutputStream fis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         String vystup = " ";
@@ -76,6 +85,13 @@ public class ResultsActivity extends AppCompatActivity {
         });
 
 
+        button_saveLocal = (Button) findViewById(R.id.button_save_local);
+        button_saveLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeLocalData(tempOutput.replaceAll("=", " "));
+            }
+        });
     }
 
 
@@ -161,6 +177,48 @@ public class ResultsActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void writeLocalData(String input){
+        if(checkExtStorage()){
+            String currentDateandTime = sdf.format(new Date());
+            File filename = new File(folder, currentDateandTime + ".txt");
+            try {
+                if(!filename.exists()) {
+                    filename.createNewFile();
+                }
+                fis = new FileOutputStream(filename);
+                OutputStreamWriter output = new OutputStreamWriter(fis);
+                output.write(input);
+                output.close();
+
+                fis.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+    }
+
+    private boolean checkExtStorage(){
+        if(folder.exists()){
+            System.err.println(folder.toString() + " IS OK");
+            return true;
+        }else{
+            System.err.println(folder.toString() + " ERROR");
+            folder.mkdir();
+            if(folder.exists()){
+                return true;
+            }else{
+                System.err.println(folder.toString() + " ERROR");
+                return false;
+            }
+
+        }
+
     }
 
 
